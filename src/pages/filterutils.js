@@ -39,8 +39,8 @@ const filterEmail = (text) => {
 }
 
 const filterLink = (text) => {
-  let normalized = normalize(text).replace(/\s/g, '')
-  let splitted = text.split(' ').filter(w => !!w)
+  let normalized = normalize(text).replace(/\s/g, ' ')
+  let splitted = text.split(' ')
   if (normalized.match(linkRegex)) {
     if (!normalized.match(allowedLinksRegex)) {
       return 'link forbidden'
