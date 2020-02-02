@@ -12,7 +12,7 @@ import { filterForbidden } from './filterutils'
 export default {
   name: 'PageIndex',
   data () {
-    return { inputText: 'Hello, how are you doing? You have nice boobs. You wanna tako on skype? ', hasError: false, errorValue: '' }
+    return { inputText: 'Do you like cumnsee.com?  ', hasError: false, errorValue: '' }
   },
   methods: {
     onSubmit () {

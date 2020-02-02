@@ -1,4 +1,4 @@
-import { blacklist, blacklistedActivity, blacklistedPayment, blacklistedPlatform, emojiRegex, emailRegex, linkRegex } from './constants'
+import { blacklist, blacklistedActivity, blacklistedPayment, blacklistedPlatform, emojiRegex, emailRegex, linkRegex, allowedLinksRegex } from './constants'
 
 const filterBlacklisted = (text) => {
   let formatted = text.toLowerCase().replace('@', 'a').replace(/[^a-zA-Z0-9\s]/g, '').trim()
@@ -31,7 +31,7 @@ const filterBlacklisted = (text) => {
 }
 
 const filterEmail = (text) => {
-  const normalized = normalize(text).replace(/\s/g, '')
+  const normalized = normalize(text).replace(/[^a-zA-Z0-9@.]/g, '')
   if (normalized.match(emailRegex)) {
     return 'email forbidden'
   }
@@ -42,17 +42,25 @@ const filterLink = (text) => {
   let normalized = normalize(text).replace(/\s/g, '')
   let splitted = text.split(' ').filter(w => !!w)
   if (normalized.match(linkRegex)) {
-    return 'link forbidden'
+    if (!normalized.match(allowedLinksRegex)) {
+      return 'link forbidden'
+    }
   }
   for (var word of splitted) {
     if (word.match(linkRegex)) {
-      return 'link forbidden'
+      if (!word.match(allowedLinksRegex)) {
+        return 'link forbidden'
+      }
     }
   }
   return 'allowed'
 }
 const filterForbidden = (original) => {
   const text = removeEmoji(original)
+  const resBlacklisted = filterBlacklisted(text)
+  if (resBlacklisted !== 'allowed') {
+    return resBlacklisted
+  }
   const resEmail = filterEmail(text)
   if (resEmail !== 'allowed') {
     return resEmail
@@ -61,10 +69,6 @@ const filterForbidden = (original) => {
   const resLink = filterLink(text)
   if (resLink !== 'allowed') {
     return resLink
-  }
-  const resBlacklisted = filterBlacklisted(text)
-  if (resBlacklisted !== 'allowed') {
-    return resBlacklisted
   }
   return 'allowed'
 }
