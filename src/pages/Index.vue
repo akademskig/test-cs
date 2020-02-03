@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { filterForbidden } from './filterutils'
+import { isContentForbidden } from './filterutils'
 export default {
   name: 'PageIndex',
   data () {
@@ -20,7 +20,7 @@ export default {
     },
 
     filterBlacklisted (value) {
-      const res = filterForbidden(value)
+      const res = isContentForbidden(value)
       if (res !== 'allowed') {
         this.hasError = true
         this.errorValue = res

@@ -55,7 +55,7 @@ const filterLink = (text) => {
   }
   return 'allowed'
 }
-const filterForbidden = (original) => {
+const isContentForbidden = (original) => {
   const text = removeEmoji(original)
   const resBlacklisted = filterBlacklisted(text)
   if (resBlacklisted !== 'allowed') {
@@ -82,5 +82,5 @@ const normalize = (text) => {
 }
 
 export {
-  filterForbidden
+  isContentForbidden
 }
