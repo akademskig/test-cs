@@ -121,18 +121,32 @@ function removeEmoji($text)
 };
 
 $arrayToTest= array(
-  "m.sussadek/@live.com asd asd",
-  "google.com ",
-  "google.com/.s",
-  "test.streaming.cumnsee.com",
-  "CumNSee.com",
-  "www.cumnsee.com",
-  "gay.cumnsee.com",
-  "youresexz.come here",
-  "bit.lye/2tmMSxD",
-  "bit.ly/2tmMSxD"
+    'm.sussadek/@live.com asd asd',
+    'google.com ',
+    'google.com/.s',
+    'test.streaming.cumnsee.com',
+    'CumNSee.com',
+    'www.cumnsee.com',
+    'gay.cumnsee.com',
+    'youresexz.come here',
+    'bit.lye/2tmMSxD',
+    'bit.ly/2tmMSxD',
+    'lets chat onsype.',
+    'do you likelive jasmin?',
+    'youre boobs are sexy.lets have a chat!',
+    'do you like pankakes?com to make me some.',
+    'I like pankakes.come to make me some.',
+    'do you like pankakes?come to make me some.',
+    'I’m so excited about our date tonight. If you play your cards right, then you’re going to love what I’ve got planned for later.',
+    'I found some sex positions I think we should try, what do you say? (Then send him some of the positions and pictures from this Sex Positions Guide)',
+    'What would you enjoy more: a quick hand job or a long drawn out sex session tonight? – Learn how to give a mind-blowing hand job here.',
+    'I miss feeling your hands all over me, ripping my clothes off and having your way with me. (this one is good for long distance relationships).',
+    'I miss feeling your hands all over me, ripping my clothes off. sdfs.bit.ly?and having your way with me. text me or my mail: hornygirlcumnsee.com'
 );
-    
+$start = time();
 foreach ($arrayToTest as $stringo) {
     echo $stringo . " : " . filterForbidden($stringo) . "\n";
 }
+$end = time();
+$total = $end - $start;
+echo "Total time: " . $total . " ms \n";
